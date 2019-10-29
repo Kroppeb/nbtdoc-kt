@@ -1,0 +1,15 @@
+mod small_file_sibling;
+
+export use small_file_sibling::SpecificCompound;
+
+compound MyCompound {
+	Foo: string
+}
+
+enum(byte) MyEnum {
+	VarOne = 1,
+	VarTwo = 2,
+	VarThree = 5
+}
+
+MyCompound describes minecraft:item;

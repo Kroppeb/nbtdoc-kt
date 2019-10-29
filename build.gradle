@@ -1,0 +1,62 @@
+buildscript {
+	ext.kotlin_version = '1.3.50'
+	ext.ktor_version = '1.2.4'
+
+	repositories {
+		jcenter()
+	}
+
+	dependencies {
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+		classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+
+	}
+
+
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'application'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'groovy'
+
+version '0.1-SNAPSHOT'
+
+
+sourceSets {
+	main.kotlin.srcDirs = main.java.srcDirs = ['src']
+	test.kotlin.srcDirs = test.java.srcDirs = ['test']
+	main.resources.srcDirs = ['resources']
+	test.resources.srcDirs = ['testresources']
+}
+
+repositories {
+	mavenLocal()
+	jcenter()
+	maven { url 'https://kotlin.bintray.com/ktor' }
+	maven { url 'https://kotlin.bintray.com/kotlinx' }
+	maven { url 'https://jitpack.io' }
+}
+
+
+compileKotlin {
+	kotlinOptions.jvmTarget = "1.8"
+	kotlinOptions {
+		freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
+	}
+}
+compileTestKotlin {
+	kotlinOptions.jvmTarget = "1.8"
+}
+
+kotlin {
+}
+
+
+dependencies {
+	compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+	compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+	compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.12.0" // JVM dependency
+	implementation 'com.github.norswap:autumn:80abd5c207'
+	testCompile 'junit:junit:4.12'
+}
